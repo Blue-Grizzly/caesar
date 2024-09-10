@@ -1,9 +1,15 @@
-#include<string.h>
 #include<ctype.h>
 
 char * lower_case = "abcdefghijklmnopqrstuvwxyzæøå";
 char * upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
 
+int string_length(char * input){
+    int i = 0;
+    while(input[i] != '\0'){
+        i++;
+    }
+    return i;
+}
 
 int letter_to_number(char c){
     for(int i = 0; i < 29; i++){
@@ -29,7 +35,7 @@ int shift(int number, int shiftvalue){
 }
 
 void caesar_encrypt(char * input, int shiftvalue){
-    for(int i = 0; i < strlen(input); i++){
+    for(int i = 0; i < string_length(input); i++){
         int n = letter_to_number(input[i]);
         if(n != -1){
             input[i] = number_to_letter(shift(n, shiftvalue), isupper(input[i]));
@@ -38,10 +44,11 @@ void caesar_encrypt(char * input, int shiftvalue){
 }
 
 void caesar_decrypt(char * input, int shiftvalue){
-    for(int i = 0; i < strlen(input); i++){
+    for(int i = 0; i < string_length(input); i++){
         int n = letter_to_number(input[i]);
         if(n != -1){
             input[i] = number_to_letter(shift(n, -shiftvalue), isupper(input[i]));
         }
     }
 }
+
